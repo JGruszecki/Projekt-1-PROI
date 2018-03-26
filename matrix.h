@@ -11,11 +11,11 @@ private:
 public:
 
     //konstruktory i dekonstruktory
-    matrix(int=1, int=1);
+    matrix(int x, int y);
     ~matrix();
 
-    double read(int wier, int kol);
-    void change(double wartosc, int wier, int kol);
+    double read(int x, int y);
+    void change(double wartosc, int x, int y);
     //operatory
     friend ostream& operator<<(ostream &ostr, const matrix &m);
     friend istream& operator>>(istream &istr, const matrix &m);
