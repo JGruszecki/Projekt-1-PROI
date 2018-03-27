@@ -1,4 +1,5 @@
 // Jakub Gruszecki
+// Klasa macierzy liczb rzeczywistych
 
 #include <iostream>
 #include <cstdlib>

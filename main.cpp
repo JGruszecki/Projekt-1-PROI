@@ -1,4 +1,6 @@
 // Jakub Gruszecki
+// Projekt 1 PROI, 2AR
+// Program testowy do klasy macierzy liczb rzeczywistych
 
 #include <iostream>
 #include <cstdlib>
