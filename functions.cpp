@@ -6,17 +6,17 @@
 using namespace std;
 
 
-int compare(int x, int y){
+int compare(int x, int y){    // Funkcja do porownywania wartosci
     if(x != y)
         return 0;
     else return 1;
 }
 
-double matrix::read(int x, int y){
+double matrix::read(int x, int y){   // metoda klasy zwracajaca wartosc elementu maceirzy o podanych wspolrzednych
     return tmatrix[x-1][y-1];
 }
 
-void matrix::change(double wartosc, int x, int y){
+void matrix::change(double wartosc, int x, int y){ // Meroda klasy zmieniajaca wartosc elementu macierzy o podanych wspolrzednych
         tmatrix[x-1][y-1] = wartosc;
 }
 matrix::matrix(int x, int y){             //    Konstruktor - x - wiersze, y - kolumny
@@ -25,7 +25,7 @@ matrix::matrix(int x, int y){             //    Konstruktor - x - wiersze, y - k
     tmatrix = new double*[rows];
     for(int i = 0; i < rows; i++)
         tmatrix[i] = new double[columns];
-    for(int i = 0; i < rows; i++)
+    for(int i = 0; i < rows; i++)            // Wypelnianie maceirzy zerammi
     {
         for(int j = 0; j < columns; j++)
             tmatrix[i][j] = 0;
@@ -38,17 +38,17 @@ matrix::~matrix(){                       //    Destruktor
     delete [] tmatrix;
 }
 
-ostream& operator<<(ostream &ostr, const matrix &m){
+ostream& operator<<(ostream &ostr, const matrix &m){    // operator wypisania macierzy na ekran
     for(int i = 0; i < m.rows; i++)
     {
         for(int j = 0; j < m.columns; j++)
                 ostr << m.tmatrix[i][j] << " ";
-        ostr << "\n";
+        ostr << endl;
     }
     return ostr;
 }
 
-istream& operator>>(istream &istr, const matrix &m){
+istream& operator>>(istream &istr, const matrix &m){    // Operator wczytania macierzy
     for(int i = 0; i < m.rows; i++)
     {
         for(int j = 0; j < m.columns; j++)
@@ -61,9 +61,9 @@ istream& operator>>(istream &istr, const matrix &m){
             }
             else
             {
-                cout << "Wczytano zly znak, prosze wczytac ponownie:  ";
+                cout << "Wczytano zly znak, prosze wczytac ponownie:  ";               // Zabezpieczenie przed wpisaniem zlych danych
                 istr.clear();
-                istr.sync();
+                istr.ignore(9999, '\n');
                 j--;
             }
         }
@@ -71,7 +71,7 @@ istream& operator>>(istream &istr, const matrix &m){
     return istr;
 }
 
-matrix matrix::operator+(const matrix &m){
+matrix matrix::operator+(const matrix &m){       // Operator sluzocy do dowawania macierzy. Zwraca obiekt bedacy wynikiem dodawania
         matrix m3(rows, columns);
         for(int i = 0; i < m.rows; i++)
         {
@@ -82,7 +82,7 @@ matrix matrix::operator+(const matrix &m){
         return m3;
 }
 
-void matrix::operator+=(const matrix &m){
+void matrix::operator+=(const matrix &m){       // Operator dodania macierzy do drogiej macierzy. Nic nie zwraca, zmienia wartosc obiektu podstawowego
         for(int i = 0; i < m.rows; i++)
         {
             for(int j = 0; j < m.columns; j++)
@@ -91,7 +91,7 @@ void matrix::operator+=(const matrix &m){
         }
 }
 
-matrix matrix::operator-(const matrix &m){
+matrix matrix::operator-(const matrix &m){  // Operator sluzacy do odejmowania macierzy. Zwraca obiekt
         matrix m3(rows, columns);
         for(int i = 0; i < m.rows; i++)
         {
@@ -102,7 +102,7 @@ matrix matrix::operator-(const matrix &m){
         return m3;
 }
 
-void matrix::operator-=(const matrix &m){
+void matrix::operator-=(const matrix &m){ // Analogicznie do operatora +=
         for(int i = 0; i < m.rows; i++)
         {
             for(int j = 0; j < m.columns; j++)
@@ -111,7 +111,7 @@ void matrix::operator-=(const matrix &m){
         }
 }
 
-matrix matrix::operator*(const matrix &m){
+matrix matrix::operator*(const matrix &m){     // Operator mnozenia macierzy. Zwraca obiekt
         matrix m3(rows, m.columns);
         for(int i = 0; i < rows; i++)
         {
@@ -127,7 +127,7 @@ matrix matrix::operator*(const matrix &m){
 
 }
 
-void matrix::operator*=(const matrix &m){
+void matrix::operator*=(const matrix &m){    // Analogicznie do += i -=
         for(int i = 0; i < rows; i++)
         {
             for(int j = 0; j < m.columns; j++)
@@ -140,7 +140,7 @@ void matrix::operator*=(const matrix &m){
         }
 }
 
-int matrix::operator==(const matrix &m){
+int matrix::operator==(const matrix &m){     // Operator sprawdzajacy, czy obiekty sa rowne
     if(columns != m.columns || rows != m.rows)
         return 0;
     for(int i = 0; i < m.rows; i++){
@@ -153,7 +153,7 @@ int matrix::operator==(const matrix &m){
     return 1;
 }
 
-int matrix::operator!=(const matrix &m){
+int matrix::operator!=(const matrix &m){          // Operator sprawdzajacy czy obiekty sa rozne
     if(rows != m.rows || columns != m.columns)
         return 1;
     for(int i = 0; i < m.rows; i++){
@@ -166,7 +166,7 @@ int matrix::operator!=(const matrix &m){
     return 0;
 }
 
-matrix& matrix::operator=(const matrix &m){
+matrix& matrix::operator=(const matrix &m){  // Operator przypisania
     rows = m.rows;
     columns = m.columns;
     tmatrix = new double* [rows];

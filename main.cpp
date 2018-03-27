@@ -7,16 +7,15 @@
 using namespace std;
 
 int compare(int x, int y);
-double getvalue();
 
 int main()
 {
-    int a, wiersze, kolumny, wiersze2, kolumny2;
+    int a, wiersze, kolumny, wiersze2, kolumny2, x, y;
     cout << "Podaj wymiary pierwszej macierzy:  " << endl;
     while(1){
         cin >> wiersze >> kolumny;
         if(cin.good()){
-            if(wiersze <= 0 || kolumny <= 0)
+            if(wiersze <= 0 || kolumny <= 0)             // Kontrola bledow, wpisana liczba musi byc calkowita i wieksza od 0
             {
                 cout << "Wymiary macierzy musza byc wieksze niz 0! Prosze wczytac ponownie:  " << endl;
                 continue;
@@ -26,7 +25,7 @@ int main()
         }
         else
         {
-            cout << "Nie podano liczny, sproboj ponownie" << endl;
+            cout << "Bledne dane, sproboj ponownie" << endl;
             cin.clear();
             cin.ignore(9999, '\n');
         }
@@ -35,7 +34,7 @@ int main()
     while(1){
         cin >> wiersze2 >> kolumny2;
         if(cin.good()){
-            if(wiersze2 <= 0 || kolumny2 <= 0)
+            if(wiersze2 <= 0 || kolumny2 <= 0)            // Kontrola bledow, wpisana liczba musi byc calkowita i wieksza od 0
             {
                 cout << "Wymiary macierzy musza byc wieksze niz 0! Prosze wczytac ponownie:  " << endl;
                 continue;
@@ -53,7 +52,7 @@ int main()
     matrix m1(wiersze, kolumny);
     matrix m2(wiersze2, kolumny2);
     cout << endl << endl;
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << "Aby wybrac operacje, wybierz odpowiadajacy jej numer i zatwierdz \"enter\"." << endl;
     cout << "1 - Wczytaj macierz m1" << endl;
     cout << "2 - Wczytaj macierz m2" << endl;
@@ -92,12 +91,12 @@ int main()
             cout << m2 << endl;
             break;
         case 5:
-            cout << "Podaj wspolrzedne elementu: ";
+            cout << "Podaj wspolrzedne elementu: " << endl;
             while(1)
             {
-                cin >> wiersze >> kolumny;
+                cin >> x >> y;
                 if(cin.good()){
-                if(wiersze <= 0 || kolumny <= 0)
+                if(x <= 0 || y <= 0)
                 {
                     cout << "Wymiary macierzy musza byc wieksze niz 0! Prosze wczytac ponownie:  " << endl;
                     continue;
@@ -107,26 +106,26 @@ int main()
                 }
                 else
                 {
-                    cout << "Nie podano liczny, sproboj ponownie" << endl;
+                    cout << "Bledna dane, sproboj ponownie" << endl;
                     cin.clear();
                     cin.ignore(9999, '\n');
                 }
             }
-            if(x >= rows || y >= columns)
+            if(x > wiersze || y > kolumny)
             {
-                cout << "Nie ma elementu o podanych wartosciach!" << endl;
+                cout << "Nie ma elementu o podanych wspolrzednych!" << endl;
                 break;
             }
-            cout << endl << "Wartosc elementu o wspolrzednych x = " << wiersze << ", y = " << kolumny << ": " << m1.read(wiersze, kolumny) << endl;
+            cout << endl << "Wartosc elementu o wspolrzednych x = " << x << ", y = " << y << ": " << m1.read(x, y) << endl;
             break;
         case 6:
-            double x;
-            cout << "Podaj wspolrzedne elementu: ";
+            double w;
+            cout << "Podaj wspolrzedne elementu: " << endl;
             while(1)
             {
-                cin >> wiersze >> kolumny;
+                cin >> x >> y;
                 if(cin.good()){
-                if(wiersze <= 0 || kolumny <= 0)
+                if(x <= 0 || y <= 0)
                 {
                     cout << "Wymiary macierzy musza byc wieksze niz 0! Prosze wczytac ponownie:  " << endl;
                     continue;
@@ -136,12 +135,12 @@ int main()
                 }
                 else
                 {
-                    cout << "Nie podano liczny, sproboj ponownie" << endl;
+                    cout << "Bledne dane, sproboj ponownie" << endl;
                     cin.clear();
                     cin.ignore(9999, '\n');
                 }
             }
-            if(x >= rows || y >= columns)
+            if(x > wiersze || y > kolumny)
             {
                 cout << "Nie ma elementu o podanych wartosciach!" << endl;
                 break;
@@ -149,17 +148,17 @@ int main()
             cout << "Podaj nowa wartosc:  ";
             while(1)
             {
-                cin >> x;
+                cin >> w;
                 if(cin.good())
                     break;
                 else
                 {
-                    cout << "Nie podano liczny, sproboj ponownie" << endl;
+                    cout << "Nie podano liczby, sproboj ponownie" << endl;
                     cin.clear();
                     cin.ignore(9999, '\n');
                 }
             }
-            m1.change(x, wiersze, kolumny);
+            m1.change(w, x, y);
             break;
         case 7:
             if(compare(wiersze, wiersze2) && compare(kolumny, kolumny2))
@@ -210,7 +209,7 @@ int main()
                 cout << "Blad, nie mozna wykonac operacji mnozenia na tych macierzach!" << endl;
             break;
         case 12:
-            if(compare(wiersze, wiersze2) && compare(kolumny, kolumny2))
+            if(compare(wiersze, wiersze2) && compare(kolumny, kolumny2) && compare(kolumny, wiersze2))
             {
                 m1 *= m2;
                 cout << m1 << endl;
